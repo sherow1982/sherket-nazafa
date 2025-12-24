@@ -18,6 +18,7 @@ body {
     background-color: var(--bg-light);
     color: var(--text-color);
     line-height: 1.6;
+    scroll-behavior: smooth; /* تمرير سلس عند الانتقال بين الأقسام */
 }
 
 .container {
@@ -37,7 +38,7 @@ a { text-decoration: none; }
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85); /* خلفية سوداء معتمة */
     z-index: 9999;
-    display: flex;
+    display: none; /* مخفي افتراضياً ويتم تفعيله بالجافاسكريبت */
     justify-content: center;
     align-items: center;
 }
@@ -122,6 +123,14 @@ nav a {
 
 nav a:hover { color: var(--primary-color); }
 
+/* زر القائمة للجوال (مخفي في الشاشات الكبيرة) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--dark-blue);
+}
+
 /* Hero Section */
 .hero {
     background-image: url('naqaa.png');
@@ -158,6 +167,45 @@ nav a:hover { color: var(--primary-color); }
     margin-bottom: 25px;
 }
 
+/* قسم العرض والعداد التنازلي */
+.offer-section {
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* لون أحمر/برتقالي ملفت */
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: -5px; /* لإلغاء أي مسافة بيضاء بعد الهيرو */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.offer-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    animation: pulse 2s infinite;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 10px;
+    min-width: 80px;
+    font-weight: bold;
+    backdrop-filter: blur(5px);
+}
+.time-box span {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
 /* الأزرار */
 .cta-buttons {
     display: flex;
@@ -178,6 +226,43 @@ nav a:hover { color: var(--primary-color); }
 
 .btn-whatsapp { background-color: var(--whatsapp-color); }
 .btn-call { background-color: var(--primary-color); }
+
+/* قسم من نحن */
+.about-section {
+    padding: 60px 0;
+    background-color: #fff;
+    border-radius: 15px;
+    margin-top: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.about-text { flex: 2; }
+.about-image {
+    flex: 1;
+    text-align: center;
+    font-size: 8rem;
+    color: var(--primary-color);
+    opacity: 0.2;
+}
+.about-text .lead {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+}
+.about-features {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.about-features span { font-weight: bold; color: var(--primary-color); }
+.about-features i { margin-left: 5px; }
 
 /* الخدمات */
 .services { padding: 60px 0; }
@@ -253,24 +338,185 @@ nav a:hover { color: var(--primary-color); }
     color: var(--primary-color);
 }
 
+/* تنسيق الإحصائيات */
+.stats {
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-color));
+    color: #fff;
+    padding: 40px 0;
+    margin: 40px 0;
+}
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.stat-item i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.8; }
+.stat-item h3 { font-size: 2rem; font-weight: bold; }
+
+/* تنسيق آراء العملاء */
+.testimonials { padding-bottom: 60px; }
+.testimonial-card {
+    background: #fff;
+    border-top: 4px solid var(--primary-color);
+    position: relative;
+}
+.testimonial-card .stars { margin-bottom: 15px; font-size: 1.2rem; }
+.testimonial-card h4 { margin-top: 15px; color: var(--dark-blue); font-size: 0.9rem; opacity: 0.8; }
+
+/* شريط الاتصال الثابت للجوال */
+.mobile-sticky-bar {
+    display: none; /* مخفي في الشاشات الكبيرة */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 9999;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 10px;
+}
+.sticky-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.call-btn { background-color: var(--primary-color); animation: pulse 2s infinite; }
+.whatsapp-btn { background-color: #25D366; }
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 168, 204, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 168, 204, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 168, 204, 0); }
+}
+
+/* تنسيق الأسئلة الشائعة (Accordion) */
+.faq { margin-bottom: 60px; }
+.accordion {
+    background-color: #fff;
+    color: var(--dark-blue);
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: right;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: 0.4s;
+    border-bottom: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.active-acc, .accordion:hover {
+    background-color: #f1f1f1;
+    color: var(--primary-color);
+}
+
+.accordion:after {
+    content: '\002B'; /* علامة الزائد */
+    color: var(--primary-color);
+    font-weight: bold;
+    float: left;
+    margin-left: 5px;
+    font-size: 1.5rem;
+}
+
+.active-acc:after {
+    content: "\2212"; /* علامة الناقص */
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    border-radius: 0 0 5px 5px;
+}
+
+/* تنسيق نموذج الحجز */
+.booking-section { margin-bottom: 60px; }
+.booking-form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 5px solid var(--primary-color);
+}
+.booking-form input, .booking-form select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 50px; /* حواف دائرية للحقول */
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+    outline: none;
+    transition: 0.3s;
+}
+.booking-form input:focus, .booking-form select:focus {
+    border-color: var(--primary-color);
+    background-color: #fff;
+}
+
 /* الفوتر */
 footer {
     background-color: #222;
     color: #ddd;
-    text-align: center;
     padding: 40px 0 20px;
 }
 
-.contact-info p {
-    margin: 10px 0;
-    font-size: 1.1rem;
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    text-align: right;
+    margin-bottom: 30px;
 }
+
+.footer-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: #ddd; transition: 0.3s; display: inline-block; }
+.footer-links a:hover { color: var(--primary-color); transform: translateX(-5px); }
+
+.footer-section p { margin-bottom: 10px; line-height: 1.8; }
+.footer-section i { margin-left: 10px; color: var(--primary-color); }
 
 .copyright {
     margin-top: 30px;
     font-size: 0.9rem;
     border-top: 1px solid #444;
     padding-top: 20px;
+    text-align: center;
 }
 
 /* تنسيق الخريطة */
@@ -317,9 +563,79 @@ footer {
 
 .my-float { margin-top: 2px; }
 
+/* زر الصعود للأعلى */
+#scrollTopBtn {
+    display: none; /* مخفي افتراضياً */
+    position: fixed;
+    bottom: 90px; /* فوق شريط الجوال */
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--dark-blue);
+    color: white;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+#scrollTopBtn:hover { background-color: var(--primary-color); transform: translateY(-3px); }
+#scrollTopBtn.show { display: block; animation: fadeIn 0.5s; }
+
+/* تأثير الظهور عند التمرير (Fade In Animation) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px); /* يبدأ من الأسفل قليلاً */
+    transition: all 0.8s ease-out;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* التجاوب مع الجوال */
 @media (max-width: 768px) {
     .hero-text h1 { font-size: 1.8rem; }
-    nav { display: none; } /* يمكن إضافة قائمة منسدلة لاحقاً */
-    .header-content { justify-content: center; }
+    
+    /* إظهار الشريط السفلي وإخفاء الزر العائم القديم لتحسين التجربة */
+    .mobile-sticky-bar { display: flex; }
+    .float-whatsapp { display: none; }
+    
+    /* تعديل مكان زر الصعود في الجوال */
+    #scrollTopBtn { bottom: 80px; right: 15px; padding: 10px; font-size: 16px; }
+    
+    body { padding-bottom: 60px; } /* مسافة عشان الشريط ما يغطي المحتوى */
+    
+    .menu-toggle {
+        display: block; /* إظهار زر القائمة */
+    }
+
+    nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        display: none; /* مخفي افتراضياً */
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav.active {
+        display: flex; /* يظهر عند الضغط */
+    }
+
+    nav ul {
+        flex-direction: column;
+        padding: 20px 0;
+        gap: 15px;
+    }
+    
+    .about-content { flex-direction: column-reverse; text-align: center; }
+    .about-text .section-title { text-align: center !important; }
+    .about-features { justify-content: center; }
+    .footer-content { text-align: center; }
 }
