@@ -1,0 +1,264 @@
+/* إعدادات عامة */
+:root {
+    --primary-color: #00a8cc; /* أزرق سماوي */
+    --dark-blue: #0c4b6e;
+    --whatsapp-color: #25D366;
+    --text-color: #333;
+    --bg-light: #f9f9f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a { text-decoration: none; }
+
+/* الشريط العلوي (Top Bar) */
+.top-bar {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+.top-bar a { color: #4cd137; font-weight: bold; text-decoration: underline; }
+
+/* الهيدر */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+}
+
+.logo span { color: var(--primary-color); }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--text-color);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover { color: var(--primary-color); }
+
+/* Hero Section */
+.hero {
+    background-image: url('naqaa.png');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* تغميق الصورة */
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+/* الأزرار */
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.2s;
+}
+
+.btn:hover { transform: scale(1.05); }
+
+.btn-whatsapp { background-color: var(--whatsapp-color); }
+.btn-call { background-color: var(--primary-color); }
+
+/* الخدمات */
+.services { padding: 60px 0; }
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--dark-blue);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 10px auto;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.card:hover { transform: translateY(-10px); }
+
+.icon-box {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* بنر ترويجي */
+.promo-banner {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 50px;
+}
+
+/* المميزات */
+.features {
+    background-color: var(--dark-blue);
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.features .section-title { color: #fff; }
+
+.features-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature-item i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+/* الفوتر */
+footer {
+    background-color: #222;
+    color: #ddd;
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.copyright {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+/* تنسيق الخريطة */
+.map-container {
+    margin: 30px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* زر الواتساب العائم */
+.float-whatsapp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    left: 20px; /* يسار الشاشة لأن الموقع عربي */
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-float { margin-top: 2px; }
+
+/* التجاوب مع الجوال */
+@media (max-width: 768px) {
+    .hero-text h1 { font-size: 1.8rem; }
+    nav { display: none; } /* يمكن إضافة قائمة منسدلة لاحقاً */
+    .header-content { justify-content: center; }
+}
